@@ -1,11 +1,10 @@
 return {
+  -- Plugins existentes
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -44,6 +43,21 @@ return {
         "tsx",
         "gitignore",
       },
+    },
+  },
+
+  -- Agregar nvim-cmp y sus dependencias
+  {
+    "hrsh7th/nvim-cmp", -- El plugin principal
+    event = "InsertEnter", -- Se carga cuando entras en modo Insert
+    config = function()
+      require "configs.cmp" -- Cargar la configuración de nvim-cmp
+    end,
+    requires = {
+      "hrsh7th/cmp-buffer", -- Fuente para el buffer actual (historial de código)
+      "hrsh7th/cmp-nvim-lsp", -- Fuente para LSP (autocompletado inteligente)
+      "hrsh7th/cmp-path", -- Fuente para autocompletado de rutas
+      "saadparwaiz1/cmp_luasnip", -- Si usas snippets con LuaSnip
     },
   },
 }
